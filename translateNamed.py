@@ -13,11 +13,11 @@ import json
 import ctmui
 #引入翻译模块
 import transModel
-from PyQt4 import  QtCore, QtGui, uic
+from PyQt5 import  QtCore, QtWidgets, uic
 
 #处理编码问题
-reload(sys)
-sys.setdefaultencoding('utf-8')
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 
 #ui文件运用方法
 #qtCreatorFile = os.path.join(os.getcwd(), os.path.splitext(os.path.basename(__file__))[0] +".ui")  # Enter file here.
@@ -25,9 +25,9 @@ sys.setdefaultencoding('utf-8')
 #ui转为py运用方法
 Ui_MainWindow = ctmui.Ui_MainWindow
 
-class MyApp(QtGui.QMainWindow, Ui_MainWindow):
+class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
         self.translateBtn.clicked.connect(self.translate)
@@ -63,7 +63,7 @@ def strNamed(words, namedType):
     return newWords
 
 if __name__ == "__main__":
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     window = MyApp()
     window.show()
     sys.exit(app.exec_())

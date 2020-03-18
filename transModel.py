@@ -6,8 +6,8 @@
 # @Version : $Id$
 # @title   :
 
-import httplib
-import md5
+import http.client
+import hashlib
 import urllib
 import random
 
@@ -31,19 +31,19 @@ def bdTrans(words, fromL='auto', toL='zh'):
     salt = random.randint(32768, 65536)
 
     sign = appid+q+str(salt)+secretKey
-    m1 = md5.new()
-    m1.update(sign)
+    m1 = hashlib.md5()
+    m1.update(sign.encode("utf-8"))
     sign = m1.hexdigest()
-    myurl = myurl+'?appid='+appid+'&q='+urllib.quote(q)+'&from='+fromLang+'&to='+toLang+'&salt='+str(salt)+'&sign='+sign
+    myurl = myurl+'?appid='+appid+'&q='+urllib.request.quote(q)+'&from='+fromLang+'&to='+toLang+'&salt='+str(salt)+'&sign='+sign
     #myurl = 'http://fanyi.youdao.com/openapi.do?keyfrom=<keyfrom>&key=<key>&type=data&doctype=xml&version=1.1&q=这里是有道翻译API'
     try:
-        httpClient = httplib.HTTPConnection('api.fanyi.baidu.com')
+        httpClient = http.client.HTTPConnection('api.fanyi.baidu.com')
         httpClient.request('GET', myurl)
 
         response = httpClient.getresponse()
         res['state'] = True
         res['connect'] = response.read()
-    except Exception, e:
+    except e:
         res['state'] = False
         res['connect'] = e
     finally:
