@@ -14,6 +14,7 @@ import ctmui
 #引入翻译模块
 import transModel
 from PyQt5 import  QtCore, QtWidgets, uic
+import sip
 
 #处理编码问题
 # reload(sys)

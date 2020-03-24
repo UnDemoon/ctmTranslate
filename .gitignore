@@ -1,5 +1,6 @@
 *.pyc
 *.ico
+*.spec
 /build/
 /dist/
 /test/
